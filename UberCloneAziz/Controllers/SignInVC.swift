@@ -16,6 +16,7 @@ class SignInVC: UIViewController, UITextFieldDelegate{
     var passwordTextField: CustomTextFieldView!
     var signInButton: CustomButton!
     var signupButton: UIButton!
+    var stackViews: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +44,7 @@ class SignInVC: UIViewController, UITextFieldDelegate{
         self.view.addSubview(signupButton)
         
         
-        let stackViews = UIStackView(arrangedSubviews: [userNameTextFiled, passwordTextField, signInButton])
+        stackViews = UIStackView(arrangedSubviews: [userNameTextFiled, passwordTextField, signInButton])
         stackViews.axis = .vertical
         stackViews.spacing = 20
         
@@ -71,10 +72,16 @@ class SignInVC: UIViewController, UITextFieldDelegate{
         signupButton.addTarget(self, action: #selector(signupButtonPressed), for: .touchUpInside)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.stackViews.alpha = 1
+    }
+    
     @objc func signupButtonPressed(){
-        
+     
+        self.stackViews.alpha = 0
         self.navigationController?.modalTransitionStyle = .crossDissolve
         self.navigationController?.pushViewController(SignUpVC(), animated: true)
+       
         
     }
     
